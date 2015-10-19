@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: Knoppys Page Navi
-	Version: 3
+	Version: 2
 	Plugin URI: http://www.knoppys.co.uk
 	Description: THis plugin helps organise your page site navigation by providing your users with a hierarchical page navigation as a widget in your sidebar. 
 	Author: Alex Knopp 
@@ -100,4 +100,3 @@ class knoppys_pagenav extends WP_Widget {
 
 // register widget
 add_action('widgets_init', create_function('', 'return register_widget("knoppys_pagenav");'));
-
