@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: Knoppys Page Navi
-	Version: 2
+	Version: 3
 	Plugin URI: http://www.knoppys.co.uk
 	Description: THis plugin helps organise your page site navigation by providing your users with a hierarchical page navigation as a widget in your sidebar. 
 	Author: Alex Knopp 
@@ -46,7 +46,6 @@ class knoppys_pagenav extends WP_Widget {
 
 	// display widget
 	function widget($args, $instance) {
-	global $post;
 	   extract( $args );
 	   // these are the widget options
 	   $title = apply_filters('widget_title', $instance['title']);
@@ -59,25 +58,17 @@ class knoppys_pagenav extends WP_Widget {
 	      echo $before_title . $title . $after_title;
 	   }
 
-	   // wp_list_pages arguments. If the post has a post parent then the arguments are  
 	   	if ($post->post_parent) {
-			
-			$args = array('child_of' => $post->post_parent, 'title_li' => __('<a href="' . get_permalink($post->post_parent) .'">' . get_the_title( $post->post_parent ) . '</a>'));
-		
+		$args = array('child_of' => $post->post_parent, 'title_li' => __('<a href="' . get_permalink($post->post_parent) .'">' . get_the_title( $post->post_parent ) . '</a>'));
 		} else {
-			
 			$args = array('child_of' => get_the_id(), 'title_li' => __(''));
 		}
 
 		//get the upper most parent title else show the title of the current page
 		if ($post->post_parent) {
-			
 			$argst = get_the_title( $post->post_parent );
-		
 		} else {
-			
 			$argst = get_the_title();
-		
 		} 
 
 		//check to see if this page has children or is a child, if it does or is, show the widget.
@@ -100,4 +91,3 @@ class knoppys_pagenav extends WP_Widget {
 
 // register widget
 add_action('widgets_init', create_function('', 'return register_widget("knoppys_pagenav");'));
-
